@@ -1,8 +1,3 @@
-% Well, this is a function that write the
-% iteration vs accurancy
-% iteration vs loss
-% To a file
-
 clc;
 clear;
 
@@ -37,7 +32,7 @@ while ischar(tline)
         end
         
         % Concatenation of two string
-        res_str = strcat(str2, ' ', str);
+        res_str = [str2 ' ' str1];
         fprintf(fid_accuracy, '%s\r\n', res_str);
     end
     
