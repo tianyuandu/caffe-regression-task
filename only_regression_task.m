@@ -3,7 +3,7 @@ function only_regression_task()
     gpu_id                 = 1;
     active_caffe_mex(gpu_id, caffe_version);   
     
-    dir='/media/cgv841/Code/tydu/regression_task/';
+    dir='./';
     solver_def_file=[dir 'solver.prototxt'];
     net_file=[dir 'vgg16.caffemodel'];
     
@@ -17,7 +17,6 @@ function only_regression_task()
 
     % init log
     timestamp = datestr(datevec(now()), 'yyyymmdd_HHMMSS');
-    mkdir_if_missing(fullfile(dir, 'log'));
     log_file = fullfile(dir, 'log', ['train_', timestamp, '.txt']);
     diary(log_file);
     
@@ -25,8 +24,8 @@ function only_regression_task()
     caffe.set_random_seed(6);
     
     % set gpu/cpu
-    caffe.set_mode_gpu();
-    %caffe.set_mode_cpu();
+    caffe.set_mode_cpu();
+    %caffe.set_mode_gpu();
     
 %% making tran/val data
 %          % fix validation data
@@ -88,7 +87,7 @@ function only_regression_task()
 %             diary; diary; % flush diary
 %         end
         if ~mod(iter_,2000)
-            show_state(iter_, train_results, val_results);
+            show_state(iter_, train_results);
         end
             % snapshot
         if ~mod(iter_, 20000)
